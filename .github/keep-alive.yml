@@ -1,0 +1,19 @@
+name: Keep Render API Awake
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # cada 10 minutos
+  workflow_dispatch:  # permite dispararlo manualmente desde la pestaña Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API health endpoint
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://tablon-api.onrender.com/health)
+          echo "Status code: $response"
+          if [ "$response" != "200" ]; then
+            echo "La API no respondió 200, código: $response"
+            exit 1
+          fi
