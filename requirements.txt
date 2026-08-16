@@ -3,3 +3,4 @@ uvicorn[standard]>=0.29,<1.0
 sqlmodel>=0.0.21,<1.0
 python-dotenv
 libsql
+sqlalchemy-libsql

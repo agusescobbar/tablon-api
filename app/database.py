@@ -8,9 +8,7 @@ TURSO_URL = os.getenv("TURSO_DATABASE_URL")
 TURSO_TOKEN = os.getenv("TURSO_AUTH_TOKEN")
 
 if TURSO_URL and TURSO_TOKEN:
-    # Formato oficial y directo para Turso con libsql
-    clean_url = TURSO_URL.replace("libsql://", "https://")
-    DATABASE_URL = f"sqlite+{clean_url}?authToken={TURSO_TOKEN}&secure=true"
+    DATABASE_URL = f"sqlite+{TURSO_URL}?authToken={TURSO_TOKEN}&secure=true"
     connect_args = {}
 else:
     # Base de datos local para desarrollo
