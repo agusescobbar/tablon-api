@@ -1,0 +1,14 @@
+# .github/workflows/keep-alive.yml
+name: Keep Render API Awake
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # cada 10 minutos
+  workflow_dispatch:  # también podés dispararlo manual desde GitHub
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API
+        run: curl -s -o /dev/null -w "%{http_code}" https://tablon-api.onrender.com/health
